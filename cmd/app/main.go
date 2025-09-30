@@ -1,10 +1,13 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
+
+	"github.com/Ssshaba/notification-service/internal/api"
+	"github.com/Ssshaba/notification-service/internal/db"
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -15,10 +18,14 @@ func main() {
 		port = "8081"
 	}
 
+	db.Connect()
+
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "pong"})
+		c.JSON(200, gin.H{"message": "pdddong"})
 	})
+
+	api.SetupRoutes(r)
 
 	log.Printf("Starting server on :%s", port)
 	if err := r.Run(":" + port); err != nil {
