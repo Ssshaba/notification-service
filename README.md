@@ -20,9 +20,9 @@ Golang/Gin, PostgreSQL, RebbitMQ
 ---
 После этих шагов будут доступны следующие маршруты:
 
-- GET `http://localhost:8876/api/documentation` - получить уведомления
-- POST `http://localhost:8876/api/documentation` - Создать сообщение синхронно
-- POST `http://localhost:8876/api/documentation` - Создать сообщение через очередь
+- GET `http://localhost:8081/notifications` - получить уведомления
+- POST `http://localhost:8081/notifications` - Создать сообщение синхронно
+- POST `http://localhost:8081/notifications/queue` - Создать сообщение через очередь
 
 Пример JSON для создания уведомления
 ```json
