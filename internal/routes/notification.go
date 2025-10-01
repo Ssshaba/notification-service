@@ -10,4 +10,7 @@ func SetupRoutes(r *gin.Engine) {
 
 	r.POST("/notifications", notificationController.Create)
 	r.GET("/notifications", notificationController.List)
+
+	r.POST("/notifications/queue", notificationController.CreateViaQueue)
+
 }

@@ -38,3 +38,18 @@ func (nc *NotificationController) List(c *gin.Context) {
 
 	c.JSON(http.StatusOK, notifications)
 }
+
+func (nc *NotificationController) CreateViaQueue(c *gin.Context) {
+	var n models.Notification
+	if err := c.ShouldBindJSON(&n); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := service.SendNotificationToQueue(&n); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to send notification to queue"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "notification sent to queue"})
+}
