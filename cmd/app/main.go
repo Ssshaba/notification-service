@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
-	"github.com/Ssshaba/notification-service/internal/api"
 	"github.com/Ssshaba/notification-service/internal/db"
 	"github.com/Ssshaba/notification-service/internal/rabbit"
+	"github.com/Ssshaba/notification-service/internal/routes"
 )
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 		c.JSON(200, gin.H{"message": "pdddong"})
 	})
 
-	api.SetupRoutes(r)
+	routes.SetupRoutes(r)
 
 	log.Printf("Starting server on :%s", port)
 	if err := r.Run(":" + port); err != nil {
