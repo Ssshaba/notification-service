@@ -4,10 +4,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/Ssshaba/notification-service/internal/api"
-	"github.com/Ssshaba/notification-service/internal/db"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+
+	"github.com/Ssshaba/notification-service/internal/api"
+	"github.com/Ssshaba/notification-service/internal/db"
+	"github.com/Ssshaba/notification-service/internal/rabbit"
 )
 
 func main() {
@@ -19,6 +21,8 @@ func main() {
 	}
 
 	db.Connect()
+
+	rabbit.InitRabbit(os.Getenv("RABBIT_URL"))
 
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
